@@ -67,7 +67,7 @@ namespace VillaAPI.Migrations
                         {
                             Id = 1,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 1, 22, 14, 59, 30, 783, DateTimeKind.Local).AddTicks(9175),
+                            CreatedDate = new DateTime(2024, 1, 24, 14, 51, 59, 492, DateTimeKind.Local).AddTicks(2332),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://dotnetmasteryimages.blob.core.windows.net/bluevillaimages/villa3.jpg",
                             Name = "Royal Villa",
@@ -80,7 +80,7 @@ namespace VillaAPI.Migrations
                         {
                             Id = 2,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 1, 22, 14, 59, 30, 783, DateTimeKind.Local).AddTicks(9192),
+                            CreatedDate = new DateTime(2024, 1, 24, 14, 51, 59, 492, DateTimeKind.Local).AddTicks(2344),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://dotnetmasteryimages.blob.core.windows.net/bluevillaimages/villa1.jpg",
                             Name = "Premium Pool Villa",
@@ -93,7 +93,7 @@ namespace VillaAPI.Migrations
                         {
                             Id = 3,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 1, 22, 14, 59, 30, 783, DateTimeKind.Local).AddTicks(9194),
+                            CreatedDate = new DateTime(2024, 1, 24, 14, 51, 59, 492, DateTimeKind.Local).AddTicks(2346),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://dotnetmasteryimages.blob.core.windows.net/bluevillaimages/villa4.jpg",
                             Name = "Luxury Pool Villa",
@@ -106,7 +106,7 @@ namespace VillaAPI.Migrations
                         {
                             Id = 4,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 1, 22, 14, 59, 30, 783, DateTimeKind.Local).AddTicks(9195),
+                            CreatedDate = new DateTime(2024, 1, 24, 14, 51, 59, 492, DateTimeKind.Local).AddTicks(2347),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://dotnetmasteryimages.blob.core.windows.net/bluevillaimages/villa5.jpg",
                             Name = "Diamond Villa",
@@ -119,7 +119,7 @@ namespace VillaAPI.Migrations
                         {
                             Id = 5,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 1, 22, 14, 59, 30, 783, DateTimeKind.Local).AddTicks(9196),
+                            CreatedDate = new DateTime(2024, 1, 24, 14, 51, 59, 492, DateTimeKind.Local).AddTicks(2349),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://dotnetmasteryimages.blob.core.windows.net/bluevillaimages/villa2.jpg",
                             Name = "Diamond Pool Villa",
@@ -133,10 +133,7 @@ namespace VillaAPI.Migrations
             modelBuilder.Entity("VillaAPI.Models.VillaNumber", b =>
                 {
                     b.Property<int>("VillaNo")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VillaNo"));
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");

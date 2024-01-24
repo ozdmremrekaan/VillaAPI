@@ -12,8 +12,8 @@ using VillaAPI.Data;
 namespace VillaAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240119131135_AddedForeignKey")]
-    partial class AddedForeignKey
+    [Migration("20240124115159_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,18 +34,15 @@ namespace VillaAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Amenity")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Details")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -73,7 +70,7 @@ namespace VillaAPI.Migrations
                         {
                             Id = 1,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 1, 19, 16, 11, 35, 244, DateTimeKind.Local).AddTicks(2090),
+                            CreatedDate = new DateTime(2024, 1, 24, 14, 51, 59, 492, DateTimeKind.Local).AddTicks(2332),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://dotnetmasteryimages.blob.core.windows.net/bluevillaimages/villa3.jpg",
                             Name = "Royal Villa",
@@ -86,7 +83,7 @@ namespace VillaAPI.Migrations
                         {
                             Id = 2,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 1, 19, 16, 11, 35, 244, DateTimeKind.Local).AddTicks(2105),
+                            CreatedDate = new DateTime(2024, 1, 24, 14, 51, 59, 492, DateTimeKind.Local).AddTicks(2344),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://dotnetmasteryimages.blob.core.windows.net/bluevillaimages/villa1.jpg",
                             Name = "Premium Pool Villa",
@@ -99,7 +96,7 @@ namespace VillaAPI.Migrations
                         {
                             Id = 3,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 1, 19, 16, 11, 35, 244, DateTimeKind.Local).AddTicks(2107),
+                            CreatedDate = new DateTime(2024, 1, 24, 14, 51, 59, 492, DateTimeKind.Local).AddTicks(2346),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://dotnetmasteryimages.blob.core.windows.net/bluevillaimages/villa4.jpg",
                             Name = "Luxury Pool Villa",
@@ -112,7 +109,7 @@ namespace VillaAPI.Migrations
                         {
                             Id = 4,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 1, 19, 16, 11, 35, 244, DateTimeKind.Local).AddTicks(2108),
+                            CreatedDate = new DateTime(2024, 1, 24, 14, 51, 59, 492, DateTimeKind.Local).AddTicks(2347),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://dotnetmasteryimages.blob.core.windows.net/bluevillaimages/villa5.jpg",
                             Name = "Diamond Villa",
@@ -125,7 +122,7 @@ namespace VillaAPI.Migrations
                         {
                             Id = 5,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 1, 19, 16, 11, 35, 244, DateTimeKind.Local).AddTicks(2165),
+                            CreatedDate = new DateTime(2024, 1, 24, 14, 51, 59, 492, DateTimeKind.Local).AddTicks(2349),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://dotnetmasteryimages.blob.core.windows.net/bluevillaimages/villa2.jpg",
                             Name = "Diamond Pool Villa",
@@ -139,16 +136,12 @@ namespace VillaAPI.Migrations
             modelBuilder.Entity("VillaAPI.Models.VillaNumber", b =>
                 {
                     b.Property<int>("VillaNo")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VillaNo"));
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SpecialDetails")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -162,32 +155,6 @@ namespace VillaAPI.Migrations
                     b.HasIndex("VillaId");
 
                     b.ToTable("VillaNumbers");
-
-                    b.HasData(
-                        new
-                        {
-                            VillaNo = 1,
-                            CreatedDate = new DateTime(2024, 1, 19, 16, 11, 35, 244, DateTimeKind.Local).AddTicks(2301),
-                            SpecialDetails = "Small Room",
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            VillaId = 0
-                        },
-                        new
-                        {
-                            VillaNo = 2,
-                            CreatedDate = new DateTime(2024, 1, 19, 16, 11, 35, 244, DateTimeKind.Local).AddTicks(2302),
-                            SpecialDetails = "Giant Room",
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            VillaId = 0
-                        },
-                        new
-                        {
-                            VillaNo = 3,
-                            CreatedDate = new DateTime(2024, 1, 19, 16, 11, 35, 244, DateTimeKind.Local).AddTicks(2303),
-                            SpecialDetails = "Big room",
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            VillaId = 0
-                        });
                 });
 
             modelBuilder.Entity("VillaAPI.Models.VillaNumber", b =>

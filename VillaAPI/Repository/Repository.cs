@@ -6,13 +6,14 @@ using VillaAPI.Repository.IRepository;
 
 namespace VillaAPI.Repository
 {
-    public class Repository<T>:  IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ApplicationDbContext _db;
         internal DbSet<T> dbSet;
         public Repository(ApplicationDbContext db)
         {
             _db = db;
+            //_db.VillaNumbers.Include(x=> x.Villa).ToList();
             this.dbSet = _db.Set<T>();
         }
         public async Task CreateAsync(T entity)
@@ -21,26 +22,39 @@ namespace VillaAPI.Repository
             await SaveAsync();
         }
 
-        public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null)
+        public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             if (filter != null)
             {
                 query = query.Where(filter);
+            }
+            if (includeProperties != null)
+            {
+                foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(property);
+                }
             }
 
             return await query.FirstOrDefaultAsync();
 
         }
 
-        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter = null)
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter = null, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             if (filter != null)
             {
                 query = query.Where(filter);
             }
-
+            if (includeProperties != null)
+            {
+                foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(property);
+                }
+            }
             return await query.ToListAsync();
         }
 
