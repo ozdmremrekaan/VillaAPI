@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using VillaAPI.Models.Dto.Villa;
 using VillaAPI.Models;
 using VillaAPI.Repository.IRepository;
 using VillaAPI.Models.Dto.VillaNumber;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace VillaAPI.Controllers
 {
-    [Route("[controller]")]
+    [Route("VillaNumber")]
     [ApiController]
+
     public class VillaNumberController : ControllerBase
     {
         protected ApiResponse _response;
@@ -34,7 +33,8 @@ namespace VillaAPI.Controllers
             return Ok(_response);
         }
 
-        [HttpGet("id")]
+
+        [HttpGet("{id}")]
         public async Task<ActionResult<ApiResponse>> Get(int id)
         {
             if (id == 0)
@@ -87,7 +87,7 @@ namespace VillaAPI.Controllers
             }
             return _response;
         }
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse>> Update([FromBody] VillaNumberUpdateDto villaNumberUpdateDto, int id)
         {
             try
@@ -118,7 +118,7 @@ namespace VillaAPI.Controllers
         }
 
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<ApiResponse>> Delete(int id)
         {
             var villa = await _context.GetAsync(x => x.VillaNo == id);

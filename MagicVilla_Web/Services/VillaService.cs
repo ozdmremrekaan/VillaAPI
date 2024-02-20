@@ -15,51 +15,56 @@ namespace MagicVilla_Web.Services
             villaUrl = configuration.GetValue<string>("ServiceUrls:VillaApi");
         }
 
-        public Task<T> CreateAsync<T>(VillaCreateDto dto)
+        public Task<T> CreateAsync<T>(VillaCreateDto dto, string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Data = dto,
-                Url = villaUrl + "/VillaApi"
+                Url = villaUrl + "/VillaApi",
+                Token = token
             });
 
         }
 
-        public Task<T> DeleteAsync<T>(int id)
+        public Task<T> DeleteAsync<T>(int id, string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = villaUrl + "/VillaApi/" + id
+                Url = villaUrl + "/VillaApi/" + id,
+                Token = token
             });
         }
 
-        public Task<T> GetAllAsync<T>()
+        public Task<T> GetAllAsync<T>(string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = villaUrl + "/VillaApi"
+                Url = villaUrl + "/VillaApi",
+                Token = token
             });
         }
 
-        public Task<T> GetAsync<T>(int id)
+        public Task<T> GetAsync<T>(int id, string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = villaUrl + "/VillaApi/" + id
+                Url = villaUrl + "/VillaApi/" + id,
+                Token = token
             });
         }
 
-        public Task<T> UpdateAsync<T>(VillaUpdateDto dto)
+        public Task<T> UpdateAsync<T>(VillaUpdateDto dto, string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
-                Url = villaUrl + "/VillaApi/" + dto.Id
+                Url = villaUrl + "/VillaApi/" + dto.Id,
+                Token = token
             });
         }
     }

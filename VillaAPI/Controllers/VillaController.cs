@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
-using System.Security.Principal;
-using VillaAPI.Data;
 using VillaAPI.Models;
 using VillaAPI.Models.Dto.Villa;
 using VillaAPI.Repository.IRepository;
@@ -13,6 +10,7 @@ namespace VillaAPI.Controllers
 {
     [Route("VillaApi")]
     [ApiController]
+    
     public class VillaController : ControllerBase
     {
         protected ApiResponse _response;
@@ -26,13 +24,17 @@ namespace VillaAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ApiResponse>> Get()
+        [Authorize(Roles = "admin")]
+        
+        public async Task<ActionResult<ApiResponse>> Get(int pagesize = 0, int pagenumber = 1)
         {
-            var villaList = await _context.GetAllAsync();
+            var villaList = await _context.GetAllAsync(pagesize:pagesize, pagenumber:pagenumber);
             _response.Result = _mapper.Map<List<VillaDto>>(villaList);
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
         }
+
+        
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ApiResponse>> Get(int id)
@@ -44,6 +46,7 @@ namespace VillaAPI.Controllers
             var villa = await _context.GetAsync(x => x.Id == id);
             if (villa == null)
             {
+                _response.IsSuccess = false;
                 return NotFound();
             }
             _response.Result = _mapper.Map<VillaDto>(villa);
@@ -51,11 +54,13 @@ namespace VillaAPI.Controllers
             return Ok(_response);
         }
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> Post([FromBody]VillaCreateDto villaDto)
         {
             
             if(await _context.GetAsync(x=> x.Name.ToLower() == villaDto.Name.ToLower())!=null)
-                {
+            {
+                _response.IsSuccess = false;
                 return BadRequest();
             }
             var villa = _mapper.Map<Villa>(villaDto);
@@ -66,6 +71,7 @@ namespace VillaAPI.Controllers
 
         }
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> Update([FromBody]VillaUpdateDto villaUpdateDto,int id)
         {
             if(id != villaUpdateDto.Id || villaUpdateDto == null)
@@ -81,6 +87,7 @@ namespace VillaAPI.Controllers
 
         }
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> Delete(int id)
         {
             var villa = await _context.GetAsync(x=> x.Id == id);
